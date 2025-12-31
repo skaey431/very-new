@@ -1,5 +1,6 @@
 package VERYNEW.app.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import VERYNEW.app.common.Constants;
+import VERYNEW.app.common.InputHandler;
 import VERYNEW.app.entities.Player;
 import VERYNEW.app.map.MapManager;
 import VERYNEW.app.map.ObjectFactory;
@@ -46,11 +48,13 @@ public class PlayScreen implements Screen {
 
         initMapObjects();
 
-        // 플레이어 생성 후 카메라 위치 초기화
         if (player != null) {
             camera.position.set(player.getBody().getPosition().x, player.getBody().getPosition().y, 0);
         }
         camera.update();
+
+        // 입력 리스너 등록
+        Gdx.input.setInputProcessor(new InputHandler());
     }
 
     private void initMapObjects() {
@@ -58,7 +62,6 @@ public class PlayScreen implements Screen {
 
         for (MapLayer layer : mapManager.getMap().getLayers()) {
             for (MapObject object : layer.getObjects()) {
-                // ObjectFactory에서 생성된 객체가 Player일 경우 할당
                 Player p = ObjectFactory.createPhysics(object, world);
                 if (p != null) {
                     this.player = p;
@@ -87,11 +90,13 @@ public class PlayScreen implements Screen {
     }
 
     public void update(float delta) {
+        // 물리 엔진 시뮬레이션
         world.step(1 / 60f, 6, 2);
 
         if (player != null) {
             player.update(delta);
-            // 카메라 추적
+
+            // 카메라 추적 (lerp를 통한 부드러운 이동)
             float lerp = 0.1f;
             camera.position.x += (player.getBody().getPosition().x - camera.position.x) * lerp;
             camera.position.y += (player.getBody().getPosition().y - camera.position.y) * lerp;
@@ -100,21 +105,17 @@ public class PlayScreen implements Screen {
         camera.update();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        viewport.update(width, height, false);
-    }
-
-    @Override public void show() {}
+    @Override public void resize(int width, int height) { viewport.update(width, height, false); }
+    @Override public void show() {} // 생성자에서 프로세서를 등록했으므로 비워둠
     @Override public void pause() {}
     @Override public void resume() {}
     @Override public void hide() {}
 
     @Override
     public void dispose() {
-        if (mapManager != null) mapManager.dispose();
-        if (mapRenderer != null) mapRenderer.dispose();
-        if (world != null) world.dispose();
-        if (debugRenderer != null) debugRenderer.dispose();
+        mapManager.dispose();
+        mapRenderer.dispose();
+        world.dispose();
+        debugRenderer.dispose();
     }
 }

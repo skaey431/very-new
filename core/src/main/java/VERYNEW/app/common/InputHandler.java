@@ -13,6 +13,7 @@ public class InputHandler extends InputAdapter {
 
     @Override
     public boolean keyDown(int keycode) {
+        System.out.println("key_down : " + keycode);
         switch (keycode) {
             case Input.Keys.LEFT:
             case Input.Keys.A:
