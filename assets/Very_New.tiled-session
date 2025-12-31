@@ -1,0 +1,35 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "map/level1.tmx": {
+            "scale": 0.4077083333333333,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 480.7358201328564,
+                "y": 320.08175779253963
+            }
+        },
+        "map/new.tmx": {
+            "scale": 0.4077083333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.7358201328564,
+                "y": 320.08175779253963
+            }
+        }
+    },
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+    ],
+    "project": "Very_New.tiled-project",
+    "recentFiles": [
+        "map/new.tmx",
+        "map/level1.tmx"
+    ]
+}
