@@ -7,7 +7,7 @@ package VERYNEW.app.common;
 public class Constants {
     // 1. 물리 관련 단위 (Pixels Per Meter)
     // 100픽셀을 1미터로 설정하여 Box2D 연산 최적화
-    public static final float PPM = 100f;
+    public static float PPM = 100f;
 
     // 2. 가상 화면 해상도 (단위: 미터)
     public static final float V_WIDTH = 800f / PPM;
@@ -27,5 +27,5 @@ public class Constants {
     public static final short BIT_GOAL = 8;        // 1000
 
     // 5. 물리 설정
-    public static final float GRAVITY = -9.8f;
+    public static float GRAVITY = -9.8f;
 }

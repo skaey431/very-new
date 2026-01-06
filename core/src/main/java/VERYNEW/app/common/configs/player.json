@@ -1,0 +1,6 @@
+{
+  "max_health": 100,
+  "attack_power": 10,
+  "max_velocity": 2.0,
+  "move_force": 0.5
+}
